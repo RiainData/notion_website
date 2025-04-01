@@ -5,6 +5,9 @@ import pandas as pd
 import os
 import kagglehub
 
+# --- MUST BE FIRST STREAMLIT COMMAND ---
+st.set_page_config(layout="wide")
+
 # --- LOAD DATASET ---
 @st.cache_data
 def load_dataset():
