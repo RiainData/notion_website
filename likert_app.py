@@ -3,16 +3,22 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
 import os
+import kagglehub
 
 # --- LOAD DATASET ---
-dataset_path = "/Users/riainfitzsimons/.cache/kagglehub/datasets/teejmahal20/airline-passenger-satisfaction/versions/1"
-csv_path = os.path.join(dataset_path, "train.csv")
+@st.cache_data
+def load_dataset():
+    try:
+        dataset_path = kagglehub.dataset_download("teejmahal20/airline-passenger-satisfaction")
+        csv_path = os.path.join(dataset_path, "train.csv")
+        df = pd.read_csv(csv_path)
+        return df, csv_path
+    except Exception as e:
+        st.error(f"Dataset could not be loaded: {e}")
+        st.stop()
 
-if os.path.exists(csv_path):
-    df_train = pd.read_csv(csv_path)
-else:
-    st.error("Dataset not found. Please check your dataset_path.")
-    st.stop()
+df_train, csv_path = load_dataset()
+st.success(f"Loaded dataset from: {csv_path}")
 
 # --- SETUP ---
 rating_features = [
