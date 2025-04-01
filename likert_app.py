@@ -74,7 +74,6 @@ for i in range(len(rating_features)):
     fig.update_yaxes(title_text="Count", gridcolor='rgba(0,0,0,0.05)', row=row, col=col)
 
 # --- STREAMLIT LAYOUT ---
-st.set_page_config(layout="wide")
 st.title("🛫 Airline Survey Service Ratings Dashboard")
 st.markdown("This dashboard displays the distribution of service feature ratings across passengers.")
 st.plotly_chart(fig, use_container_width=True)
